@@ -6,11 +6,11 @@ using namespace std;
 /**
       (Start)
          |
-      -------
-      |     |
-      5     6
-      |     |
-    ------ ------
+      ---------------
+      |              |
+      5              6
+      |              |
+    ------        ------
    |      |      |      |
    55     56     65     66
    |      |      |      |
@@ -36,10 +36,36 @@ void printFirstN(int n, vector<int>arr) {
      }
      cout << endl;
 }
+
+vector<string> generateBinaryNumbers(int n) {   
+     queue<string> q;
+     q.push("1");
+     vector<string> result;
+     vector<string> arr = {"0", "1"};
+
+
+     for(int count=0;count<n;count++) {
+        string curr = q.front();
+        cout << "curr: " << curr << endl;
+        result.push_back(curr);
+        q.pop();
+
+        for(string s: arr) {
+            q.push(curr + s);
+        }
+     }
+    return result;
+}
 int main() {
 
     int n;cin>>n;
-    vector<int> arr = {1,2,3,4};
+    vector<int> arr = {5,6};
     printFirstN(n, arr);
+
+    vector<string> res = generateBinaryNumbers(5);
+    for(string s: res) {
+      cout << s << " ";
+    }
+    cout << endl;
     return 0;
 }
