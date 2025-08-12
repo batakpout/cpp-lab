@@ -14,6 +14,7 @@ using namespace std;
  5. Evaluation of Postfix/Prefix
  6. Stock span problem and its variants
  7. undo/redo or forward/backward in editor and browser.
+ 8. push, pop and top are O(1)
  */
 int main() {
     stack<string> stk;
