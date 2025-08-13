@@ -257,6 +257,132 @@ class SinglyLinkedList {
 
         }
 
+        SinglyLinkedList mergeSortedNodes(SinglyLinkedList list1, SinglyLinkedList list2) {
+            ListNode* head1 = list1.head;
+            ListNode* head2 = list2.head;
+            SinglyLinkedList newList;
+
+            while(head1 != nullptr && head2 != nullptr) {
+                if(head1->data < head2->data) {
+                    newList.pushBack(head1-> data);
+                    head1 = head1->next;
+                } else {
+                    newList.pushBack(head2->data);
+                    head2 = head2->next;
+                }
+            }
+
+            while(head1 != nullptr) {
+                newList.pushBack(head1->data);
+                head1 = head1->next;
+            }
+
+            while(head2 != nullptr) {
+                newList.pushBack(head2->data);
+                head2 = head2->next;
+            }
+
+            return newList;
+        }
+
+        ListNode* mergeSortedNodesRecursive(ListNode* head1, ListNode* head2) {
+            if(head1 == NULL) return head2;
+            if(head2 == nullptr) return head1;
+
+            ListNode* res;
+
+            if(head1->data < head2-> data) {
+                res = head1;
+                res->next = mergeSortedNodesRecursive(head1->next, head2);
+            } else {
+                res = head2;
+                res->next = mergeSortedNodesRecursive(head1, head2-> next);
+            }
+            return res;
+        }
+
+        // Example: For 1→2→3→4→5→6→7 and K=3 → Output: 5
+        int kthLastElementNaive(int k) {
+
+            int n=0;
+            ListNode* curr = head;
+            while(curr!=NULL) {
+                curr = curr-> next;
+                n++;
+            }
+            curr = head;
+            for(int i=0;i<n-k;i++) {
+                curr = curr->next;
+            }
+            return curr->data;
+        }
+
+        int kthLastElementOptimized(int k) {
+            ListNode* slowPtr = head;
+            ListNode* fastPtr = head;
+            int i=0;
+             //keep k step gap between the slow and fast pointe
+            while(i<k) {
+                fastPtr=fastPtr->next;
+                i++;
+            }
+            //now move fast and slow pointer, once fast reaches null, slower will
+        // be k steps away from fast pointer
+            while(fastPtr != NULL) {
+                slowPtr = slowPtr -> next;
+                fastPtr = fastPtr->next;
+            }
+
+            return slowPtr->data;
+            
+        }
+
+        /*
+            alternative merge
+            1->2->3->4
+            5->6->7->8
+            output: 1->5->2->6->3->7->4->8
+        */
+        SinglyLinkedList alternativeMerge(SinglyLinkedList list1, SinglyLinkedList list2) {
+            ListNode* head1 = list1.head;
+            ListNode* head2 = list2.head;
+            SinglyLinkedList newList;
+
+            while(head1 != nullptr && head2 != nullptr) {
+                    newList.pushBack(head1-> data);
+                    head1 = head1->next;
+                    newList.pushBack(head2->data);
+                    head2 = head2->next;
+            }
+
+            while(head1 != nullptr) {
+                newList.pushBack(head1->data);
+                head1 = head1->next;
+            }
+
+            while(head2 != nullptr) {
+                newList.pushBack(head2->data);
+                head2 = head2->next;
+            }
+
+            return newList;
+        }
+
+
+        //using runner technique
+        int middleElement() {
+            ListNode* slowPtr = head;
+            ListNode* fastPtr = head->next;
+            while(fastPtr != NULL && fastPtr->next != NULL) {
+                slowPtr=slowPtr->next;
+                fastPtr=fastPtr->next->next;
+            }
+            return slowPtr->data;
+        }
+    
+        
+
+
 
 
 
