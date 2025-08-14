@@ -1,4 +1,5 @@
 #include<iostream>
+#include<unordered_set>
 using namespace std;
 
 class ListNode {
@@ -24,6 +25,10 @@ class SinglyLinkedList {
         SinglyLinkedList() {
             this->head = nullptr;
             this->tail = nullptr;
+        }
+
+        ListNode* getHead() {
+            return head;
         }
 
         void pushFront(int val) {
@@ -112,7 +117,7 @@ class SinglyLinkedList {
             if(node->data == d) {
                 return idx;
             }
-            return searchRecursive(node->next, d, idx++);
+            return searchRecursive(node->next, d, idx +1); // don't use idx++, it passes current idx and then increments
         }
 
         bool isEmpty() {
@@ -368,28 +373,205 @@ class SinglyLinkedList {
             return newList;
         }
 
+        void bubbleSort() {
+            ListNode* curr = head;
+            int n=0;
+            while(curr != NULL) {
+                curr=curr->next;
+                n++;
+            }
+
+            int temp;
+            bool swapped;
+            for(int i=0;i<n-1;i++) {
+                curr = head;
+                swapped = false;
+                for(int j=0;j<n-i-1;j++) {
+                    if(curr->data > curr->next->data) {
+                        swapped = true;
+                        temp = curr->data;
+                        curr->data = curr->next->data;
+                        curr->next->data = temp;
+                    }
+                    if(!swapped) {
+                        break;
+                    }
+                }
+            }
+        }
 
         //using runner technique
-        int middleElement() {
-            ListNode* slowPtr = head;
-            ListNode* fastPtr = head->next;
+        ListNode* findMidPoint(ListNode* curr) {
+            ListNode* slowPtr = curr;
+            ListNode* fastPtr = curr->next;
             while(fastPtr != NULL && fastPtr->next != NULL) {
                 slowPtr=slowPtr->next;
                 fastPtr=fastPtr->next->next;
             }
-            return slowPtr->data;
+            return slowPtr;
         }
-    
-        
 
+        ListNode* mergeSort(ListNode * head) {
+            if(head == NULL || head->next == NULL) {
+                return head;
+            }
+            ListNode* mid = findMidPoint(head);
+            ListNode* a = head;
+            ListNode* b = mid->next;
+            mid->next=NULL;
+            a = mergeSort(a);
+            b = mergeSort(b);
+            return mergeSortedNodesRecursive(a, b);
+        }
 
+        //TC: O(N), SC: O(N)
+        bool detectCycle1(ListNode* head) {
+            unordered_set<ListNode*> nodeSet;
+            ListNode* curr = head;
+            while(curr != NULL) {
+                if(nodeSet.find(curr) != nodeSet.end()) {
+                    return true;
+                }
+                nodeSet.insert(curr);
+                curr = curr->next;
+            }
+            return false;
+        }
 
-
-
+        //TC: O(N), SC: O(1)
+        bool detectCycle2(ListNode* head) {
+            ListNode* slowPtr = head;
+            ListNode* fastPtr = head;
+            while(slowPtr != NULL && fastPtr != NULL && fastPtr->next != NULL) {
+                slowPtr = slowPtr->next;
+                fastPtr = fastPtr->next->next;
+                if(slowPtr == fastPtr) {
+                    return true;
+                }
+            }
+            return false;
+        }
 
 };
 
+        void print(ListNode* head) {
+                ListNode* curr = head;
+                while (curr != nullptr) {
+                    cout << curr->data << "-->";
+                    curr = curr->next;
+                }
+                cout << "NULL" << endl;
+        }
+
 int main() {
+
+    SinglyLinkedList list;
+
+    cout << "Initial list:" << endl;
+    list.display();
+    cout << "Is empty: " << (list.isEmpty() ? "true" : "false") << endl;
+
+    // Add elements to the front
+    list.pushFront(40);
+    cout << "\nAfter adding 40:" << endl;
+    list.display();
+
+    list.pushFront(20);
+    cout << "\nAfter adding 20:" << endl;
+    list.display();
+
+    list.pushFront(10);
+    cout << "\nAfter adding 10:" << endl;
+    list.display();
+
+    cout << "\nList size: " << list.size() << endl;
+    cout << "Is empty: " << (list.isEmpty() ? "true" : "false") << endl;
+
+    cout << "\nAfter appending 50, 60: " << endl;
+    list.pushBack(50);
+    list.pushBack(60);
+    cout << "\nAfter inserting 30 at pos 2: " << endl;
+    list.insert(30, 2);
+    list.pushBack(70);
+    list.pushBack(80);
+    list.display();
+
+    int searchIndex = list.search(40);
+    cout << "40 is found at index: " << searchIndex << endl;
     
+   // list.destroy();
+    //cout << "Popping front of the list:" << endl;
+    //list.popFront();
+
+    cout << "k(3)-reverse:" << endl;
+    list.kReverse(3);
+    list.display();
+    cout << endl;
+
+    SinglyLinkedList list1;
+    list1.pushBack(1);
+    list1.pushBack(5);
+    list1.pushBack(7);
+    list1.pushBack(10);
+
+    SinglyLinkedList list2;
+    list2.pushBack(2);
+    list2.pushBack(3);
+    list2.pushBack(6);
+    list1.display();
+    list2.display();
+
+    cout << "Merging two lists output: " << endl;
+    ListNode* merged = list.mergeSortedNodesRecursive(list1.getHead(), list2.getHead());
+    print(merged);
+    cout << endl;
+
+    cout << "Merge sort:";
+    SinglyLinkedList mergeSortList;
+    mergeSortList.pushBack(6);
+    mergeSortList.pushBack(1);
+    mergeSortList.pushBack(5);
+    mergeSortList.pushBack(2);
+    mergeSortList.pushBack(4);
+    mergeSortList.pushBack(3);
+    ListNode* newHead = mergeSortList.mergeSort(mergeSortList.getHead());
+    print(newHead);
+    cout << endl;
+
+    cout << "\n=== Testing Cycle Detection ===" << endl;
+
+    ListNode* node1 = new ListNode(4);
+    ListNode* node2 = new ListNode(1);
+    ListNode* intersection = new ListNode(8);
+    ListNode* node4 = new ListNode(4);
+    ListNode* node5 = new ListNode(5);
+
+    node1->next = node2;
+    node2->next = intersection;
+    intersection->next = node4;
+    node4->next = node5;
+    node5->next = intersection;  // This creates the cycle - points back to intersection
+
+    SinglyLinkedList cycleList1;
+    bool hasCycle1 = cycleList1.detectCycle1(node1);
+    cout << "detectCycle1 (hash set method): " << (hasCycle1 ? "Cycle detected" : "No cycle") << endl;
+
+    // (Floyd's algorithm - tortoise and hare)
+    SinglyLinkedList cycleList2;
+    bool hasCycle2 = cycleList2.detectCycle2(node1);
+    cout << "detectCycle2 (Floyd's algorithm): " << (hasCycle2 ? "Cycle detected" : "No cycle") << endl;
+    cout << endl;
+
+    // Test with a list without cycle
+    ListNode* noCycleHead = new ListNode(1);
+    noCycleHead->next = new ListNode(2);
+    noCycleHead->next->next = new ListNode(3);
+    noCycleHead->next->next->next = new ListNode(4);
+
+    bool noCycle1 = cycleList1.detectCycle1(noCycleHead);
+    bool noCycle2 = cycleList2.detectCycle2(noCycleHead);
+    cout << "No cycle test - detectCycle1: " << (noCycle1 ? "Cycle detected" : "No cycle") << endl;
+    cout << "No cycle test - detectCycle2: " << (noCycle2 ? "Cycle detected" : "No cycle") << endl;
+    cout << endl;
     return 0;
 }
