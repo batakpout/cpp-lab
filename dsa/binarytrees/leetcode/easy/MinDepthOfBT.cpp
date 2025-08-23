@@ -20,7 +20,7 @@ When we hear "shortest path" or "closest" in the context of trees or graphs, Bre
 BFS explores the tree level by level. The first time we encounter a leaf node, we’re guaranteed it's at the minimum possible depth.
 
  */
-#include "tree.h"
+#include "../../tree.h"
 
 int minDepthBFS(TreeNode* node) {
     if(node == NULL) {
