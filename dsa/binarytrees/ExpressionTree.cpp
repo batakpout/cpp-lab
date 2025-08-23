@@ -1,21 +1,21 @@
 #include <iostream>
 using namespace std;
+
 //todo: Construct expression tree
 struct Node {
-    string key;    // stores either operator or number
+    string key;    
     Node* left;
     Node* right;
     Node(string v) : key(v), left(NULL), right(NULL) {}
 };
 
-//TC: O(N), maximum recursion depth O(N)
+//TC: O(N), maximum recursion depth O(N), post order
 int evalTree(Node* root) {
 
     if (root == NULL) {
         return 0;
     }
 
-    // If the node is a leaf (i.e., a number), return its integer value
     if (root->left ==NULL && root->right == NULL) {
         return stoi(root->key);
     }

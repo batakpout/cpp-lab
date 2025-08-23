@@ -178,38 +178,6 @@ int sizeBT(Node * root) {
   return 1 + sizeBT(root -> left) + sizeBT(root -> right);
 }
 
-string calculate(string a, string b, string op) {
-    int num1 = stoi(a);
-    int num2 = stoi(b);
-    int result = 0;
-
-    if (op == "+") {
-        result = num1 + num2;
-    } else if (op == "-") {
-        result = num1 - num2;
-    } else if (op == "*") {
-        result = num1 * num2;
-    } else if (op == "/") {
-        if (num2 == 0) {
-            return "Division by zero error";
-        }
-        result = num1 / num2;
-    } else {
-        return "Invalid operator";
-    }
-
-    return to_string(result);
-}
-
-int expressionTree(Node * root) {
-  if(root->left == NULL && root->right == NULL) {
-    return root->data;
-  }
-  int d1 = expressionTree(root->left);
-  int op = root->data;
-}
-
-
 
   //1 2 3 4 5 -1 6 -1 -1 7 -1 -1 -1 -1 -1 
 
