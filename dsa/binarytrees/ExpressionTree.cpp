@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-
+//todo: Construct expression tree
 struct Node {
     string key;    // stores either operator or number
     Node* left;
