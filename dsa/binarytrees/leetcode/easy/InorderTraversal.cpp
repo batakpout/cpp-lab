@@ -4,7 +4,7 @@ using namespace std;
 
 LC 94 Easy;  Binary Tree Inorder Traversal 
 
-//keep level order build in mind
+keep level order build in mind
  
 Given the root of a binary tree, return the inorder traversal of its nodes' values.
 
