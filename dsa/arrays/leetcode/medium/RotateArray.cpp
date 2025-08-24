@@ -42,3 +42,18 @@ void rotate(std::vector<int>& nums, int k) {
     reverse(n - k, n - 1, nums);
     reverse(0, n - 1, nums);
 }
+
+int main() {
+    vector<int> nums = {1, 2, 3, 4, 5, 6, 7};
+    int k = 3;
+
+    rotate(nums, k);
+
+    for (int num : nums) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+
