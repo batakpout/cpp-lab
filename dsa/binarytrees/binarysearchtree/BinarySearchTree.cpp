@@ -41,6 +41,22 @@ bool search(TreeNode * root, int target) {
     }
 }
 
+void printRange(TreeNode* root, int low, int high) {
+    if(root == NULL) {
+        return;
+    }
+    if(root->val>=low && root->val <=high) {
+        printRange(root-> left, low, high);
+        cout << root->val << " ";
+        printRange(root->right, low, high);
+     } else if(root->val > high) {
+        printRange(root->left, low, high);
+     } else { // (root->val<low)
+        printRange(root->right, low, high);
+     }
+
+}
+
 
 
 int main() {
@@ -56,14 +72,8 @@ int main() {
     bool res = search(root, item);
     cout << (res ? "Item present: Yes" : "Item present: No");
     cout << endl;
-
-    cout << "current tree:\n";
-    levelOrderTraversal(root);
-    cout << "Enter a node to delete:";
-    int d; cin>>d;
-    TreeNode* rootAfterDelete = deleteNode(root, d);
-    levelOrderTraversal(rootAfterDelete);
-
+    cout << "printing in range:\n";
+    printRange(root, 5,12);
     cout << endl;
 
     return 0;
