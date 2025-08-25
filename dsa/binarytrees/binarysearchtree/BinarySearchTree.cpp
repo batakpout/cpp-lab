@@ -41,6 +41,7 @@ bool search(TreeNode * root, int target) {
     }
 }
 
+//O(n) worst case, log(n) best case
 void printRange(TreeNode* root, int low, int high) {
     if(root == NULL) {
         return;
@@ -57,24 +58,92 @@ void printRange(TreeNode* root, int low, int high) {
 
 }
 
+//O(h) Time and O(1) Space
+int findFloor(TreeNode* root, int x, int floor=-1) {
+    
+    if(root == NULL) {
+        return floor;
+    }
+
+    if(x == root->val) {
+        return root->val;
+    }
+    
+    if(x < root->val) { // means we have to go left as we have to find item less than x
+        return findFloor(root->left, x, floor);
+    } else { // means closest less than x will be on right side
+        return findFloor(root->right, x , root->val);
+    } 
+    
+}
+
+//O(N) time and O(h) space, post order version
+int findFloorNaive(TreeNode* root, int x) {
+    if(root == NULL) {
+        return -1;
+    }
+    int left = findFloorNaive(root->left, x);
+    int right = findFloorNaive(root->right, x);
+
+    if(root->val > x) {
+        return max(left, right);
+    }
+    return max({left, right, root->val});
+}
+
+//O(h) Time and O(1) Space
+int findCeil(TreeNode* root, int x, int ceil=-1) {
+    
+    if(root == NULL) {
+        return ceil;
+    }
+
+    if(x == root->val) {
+        return root->val;
+    }
+    
+    if(x > root->val) { // means root->val is less than x mean I have to find nearest greater than x so I have to go right side
+        return findCeil(root->right, x, ceil);
+    } else { // means root->val is a potential candidate, on right there will  be values more than root->val so can't go right
+        return findCeil(root->left, x , root->val);
+    } 
+    
+}
+
 
 
 int main() {
     TreeNode* root = NULL;
-    int arr[] = {8,3,10,1,6,14,4,7,13};
+    int arr[] = {10,5,11,4,7,8};
     for(int x: arr) {
         root = insert(root, x);
     }
-    printInOrder(root);
-    cout << endl;
+   // printInOrder(root);
+   // cout << endl;
 
-    cout << "Enter item to search: \n"; int item;cin>>item;
-    bool res = search(root, item);
-    cout << (res ? "Item present: Yes" : "Item present: No");
-    cout << endl;
-    cout << "printing in range:\n";
-    printRange(root, 5,12);
-    cout << endl;
+    //cout << "Enter item to search: \n"; int item;cin>>item;
+    //bool res = search(root, item);
+    //cout << (res ? "Item present: Yes" : "Item present: No");
+    //cout << endl;
 
+   // cout << "printing in range:\n";
+   // printRange(root, 5,12);
+   // cout << endl;
+
+     levelOrderTraversal(root);
+     cout << "enter x for floor calculation:";
+     int x; cin>>x;
+     int r1  = findFloor(root, x);
+     int r  = findFloorNaive(root, x);
+     cout << "floor1: " << r1;
+     cout << "floor2: " << r;
+     cout << endl;
+     
+     cout << "enter x for ceil calculation:";
+     int y; cin>>y;
+     int r2  = findCeil(root, y);
+     cout << "ceil: " << r2;
+     cout << endl;
+     
     return 0;
 }
