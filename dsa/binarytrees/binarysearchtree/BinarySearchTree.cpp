@@ -23,7 +23,7 @@ void printInOrder(TreeNode* root) {
     printInOrder(root->right);
 }
 
-//since BST so restrict we search in one direction at each point
+//since BST so we restrict search in one direction at each point
 //time-complexity:O(h) i.e log(n) best case and o(n) worst case i.e log(n) <= h <= n
 //Important: so in BST complexity depends upon the structure of the tree.
 //binary tree will take O(n) for this
