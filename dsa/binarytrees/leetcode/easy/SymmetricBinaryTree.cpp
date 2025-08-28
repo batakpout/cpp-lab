@@ -45,6 +45,7 @@ bool isMirror(TreeNode* left, TreeNode* right) {
     isMirror(left->left, right-> right) &&
     isMirror(left->right, right->left);
 }
+
 bool isSymmetrical(TreeNode* root) {
     if(root == NULL) {
         return true;

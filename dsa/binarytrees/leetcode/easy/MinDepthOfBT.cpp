@@ -28,7 +28,6 @@ int minDepthBFS(TreeNode* node) {
     }
     queue<TreeNode*> q;
     q.push(node);
-    
 
     int depth=1;
     while(!q.empty()) {

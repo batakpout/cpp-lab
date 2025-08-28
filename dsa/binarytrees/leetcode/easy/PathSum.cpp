@@ -34,7 +34,7 @@ bool helper(TreeNode* root, int targetSum) {
         return targetSum == root->val;
     }
 
-    return helper(root->left, targetSum - root->val) || //short circut operator, won't go to right branch if left branch returns true
+    return helper(root->left, targetSum - root->val) || // || short circut operator, won't go to right branch if left branch returns true
            helper(root->right, targetSum-root->val); 
 }
 
