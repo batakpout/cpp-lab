@@ -54,7 +54,7 @@ public:
         return -1;
     }
     
-    int top() {
+    int peek() {
         if(q1.empty()) {
                while(!q2.empty()) {
                  int front = q2.front();
@@ -91,3 +91,25 @@ public:
  * int param_3 = obj->top();
  * bool param_4 = obj->empty();
  */
+
+ int main() {
+
+    MyStack stk;
+    stk.push(1);
+    stk.push(2);
+    stk.pop();
+    stk.push(3);
+    stk.push(4);
+    stk.push(5);
+    stk.push(6);
+    stk.push(7);
+    stk.pop();
+    stk.pop();
+
+    while(!stk.empty()) {
+        cout << "Peek: " << stk.peek() << endl;
+        stk.pop();
+    }
+    cout << "Empty stack: " << stk.empty();
+    return 0;
+}
