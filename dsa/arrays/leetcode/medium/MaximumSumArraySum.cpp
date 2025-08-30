@@ -47,7 +47,7 @@ public:
         }
         int maxSum = INT_MIN;
         for(int i=0;i<n;i++) {
-            for(int j=0;j<n;j++) {
+            for(int j=i;j<n;j++) {
                 int currSum = (i==0) ? prefixSum[i] : prefixSum[j] - prefixSum[i-1];
                 maxSum = max(maxSum, currSum);
             }
@@ -58,7 +58,6 @@ public:
      // O(N) approach using Kadane's Algorithm
     static int kadanesAlgorithm(const vector<int>& nums) {
         int maxSum = INT_MIN;
-        int n = nums.size();
         int cs = 0;
         for(int num: nums) {
             cs += num;
