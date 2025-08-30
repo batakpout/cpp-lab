@@ -177,7 +177,25 @@ int sizeBT(Node * root) {
 
   return 1 + sizeBT(root -> left) + sizeBT(root -> right);
 }
+//print all paths from root to leaf
+void printRootToLeafPath(Node* root, vector<int>& path) {
+  if(root == NULL) {
+    return;
+  }
+  if(root->left == NULL && root->right == NULL) {
+     for(int node: path) {
+      cout << node << "->";
+     }
+      cout << root->data;
+      cout << endl;
+      return;
+    }
+     path.push_back(root->data);
+     printRootToLeafPath(root->left, path);
+     printRootToLeafPath(root->right, path);
+     path.pop_back();
 
+}
 
   //1 2 3 4 5 -1 6 -1 -1 7 -1 -1 -1 -1 -1 
 
