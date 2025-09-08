@@ -147,6 +147,8 @@ Now if my heap is:
   Index:   0     1    2    3   4     5 
   Value:   100   40   50   20  30   15 
 
-  Now if I want to insert 120
+  Now if I want to insert 120, we have to insert it at index 6, we compare if its parent is < current(120) which is at index 2 i.e 50
+  since it is less we swap them, so now at index 2 we have 120 and at index 6 50. Now again compare index 2 which has now 120 with its 
+  parent i.e 100 since 120>100, we swap them, now 120 is at index 0 and 100 at index 2. Now we have maintained max heap.
        
 */
