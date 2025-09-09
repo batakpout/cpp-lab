@@ -2,7 +2,7 @@
     Binary heap
         - used in heap sort.
         - used to implement priority queues
-        - used in Graph algorithms (like Dijkstra's, Prim's)
+        - priority queues used in Graph algorithms (like Dijkstra's, Prim's)
         - two types:
           * Min heap(highest priority item is assigned lowest value)
           * Max heap(highest priority item is assigned highest value)
