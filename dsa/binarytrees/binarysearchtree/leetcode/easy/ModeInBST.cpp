@@ -56,8 +56,8 @@ void helper(TreeNode* root, unordered_map<int, int> & freq) {
     if(!root) {
         return;
     }
-    helper(root->left, freq);
     freq[root->val]++;
+    helper(root->left, freq);
     helper(root->right, freq);
 }
 
@@ -100,10 +100,39 @@ vector<int> findMode(TreeNode* root) {
 
 }
 
-//O(N) with no auxillary space
-vector<int> findMode2(TreeNode* root) { 
+class Approach2 {
+  int max_freq = 0;
+  int curr_freq = 0;
+  int curr_num=0;
+  vector<int> v;
+  public:
+  //beats 100% on leetcode
+  void dfs(TreeNode* root) {
+    if(root == NULL) return;
+    dfs(root->left);
+    if(root->val == curr_num) {
+       curr_freq++;
+    } else {
+      curr_num = root->val;
+      curr_freq = 1;
+    }
 
-}
+    if(curr_freq > max_freq) {
+      v={};
+      v.push_back(curr_num);
+      max_freq = curr_freq;
+    }  else if(curr_freq == max_freq) {
+      v.push_back(curr_num);
+    }
+    dfs(root->right);
+  }
+  vector<int> findMode2(TreeNode* root) { 
+      dfs(root);
+      return v;
+  }
+};
+//O(N) with no auxillary space
+
 
 int main() {
 
@@ -123,9 +152,13 @@ int main() {
         cout << n << " ";
     }
 
-
-
     cout << endl;
-
+    cout << "\n===Approach2===\n";
+    Approach2 approach2;
+    vector<int> res2 = approach2.findMode2(root);
+      for(int n: res2) {
+          cout << n << " ";
+      }
+    cout << endl;
     return 0;
 }
