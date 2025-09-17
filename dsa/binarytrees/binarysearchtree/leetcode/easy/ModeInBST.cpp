@@ -56,8 +56,8 @@ void helper(TreeNode* root, unordered_map<int, int> & freq) {
     if(!root) {
         return;
     }
-    freq[root->val]++;
     helper(root->left, freq);
+    freq[root->val]++;
     helper(root->right, freq);
 }
 
