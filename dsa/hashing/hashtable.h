@@ -122,7 +122,7 @@ class HashTable {
             int pow = 1;
             for(char ch: key) {
                 idx = (idx + ch*pow)%ts;
-                pow = (pow*29)%ts;
+                pow = (pow*29)%ts; //%ts not really needed here
             }
             return idx;
         }
@@ -135,7 +135,7 @@ class HashTable {
             table[idx]=n;
             cs++;
             float load_factor = cs/float(ts);
-            if(load_factor > 0.7) {
+            if(load_factor > 111) { //keep it 0.7, changed for test purposes
                 rehash();
             }
 
@@ -151,6 +151,60 @@ class HashTable {
                 }
                 cout << endl;
             }
+        }
+
+        T* search(string key) {
+            int idx = hashFn(key);
+            Node<T>* temp = table[idx];
+            while(temp != NULL) {
+                if(temp->key == key) {
+                    return &temp->data;
+                }
+                temp=temp->next;
+            }
+            return nullptr;
+        }
+
+        //we have to comment out ~Node destructor before this
+        void erase(string key) {
+            int idx = hashFn(key);
+            Node<T> * temp = table[idx];
+            Node<T> * prev=NULL;
+
+            while(temp != NULL) {
+                if(temp->key == key) {
+                   if(prev==NULL) {
+                     table[idx] = temp->next;
+                   } else {
+                        prev->next = temp->next;
+                   }
+                   temp->next = NULL; //so ~Node destructor won't kick in
+                    delete temp;
+                    return;
+                }
+                prev=temp;
+                temp=temp->next;
+
+            }          
+        }
+
+        /**
+         why T& works here:
+         Memory location 0x1000 contains: [some integer value; temp->data]
+        valueFound = 0x1000              (pointer to that location)
+        *valueFound = [the integer]      (the actual value at 0x1000)
+        return *valueFound               (reference to location 0x1000)
+
+        h["banana"] = 310 now writes 310 directly to location 0x1000
+         */
+        T& operator[](string key) {
+            T* valueFound =  search(key);
+            if(valueFound == NULL) {
+                T obj;
+                insert(key, obj);
+                valueFound = search(key);
+            }
+            return *valueFound;
         }
         
 
