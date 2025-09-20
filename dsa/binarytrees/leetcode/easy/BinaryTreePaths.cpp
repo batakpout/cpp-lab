@@ -16,6 +16,27 @@ Output: ["1"]
 
  */
 #include "../../tree.h"
+/*
+This program collects all root-to-leaf paths of a binary tree.
+
+Example tree:
+
+            1
+          /   \
+         2     3
+        / \      \
+       4   5      6
+          / \
+         7   8
+
+Expected output of binaryTreePaths(root):
+[
+  "1->2->4",
+  "1->2->5->7",
+  "1->2->5->8",
+  "1->3->6"
+]
+*/
 
 //O(N) uses backtracking
 void helper(TreeNode* root, string path, vector<string> &res) {
