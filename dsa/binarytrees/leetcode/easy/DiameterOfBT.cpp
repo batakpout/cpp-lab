@@ -17,9 +17,30 @@ Example 2:
 Input: root = [1,2]
 Output: 1
 
+
+(the length of the longest path between any two nodes, measured in edges).
+
+Example tree:
+
+            1
+          /   \
+         2     3
+        / \     \
+       4   5     6
+          / \
+         7   8
+
+- Longest path is: 7 -> 5 -> 2 -> 1 -> 3 -> 6
+- Number of edges in this path = 5
+
+Expected output from naiveDiameter(root):
+5
+
  */
 #include<iostream>
+#include "../tree.h"
 using namespace std;
+
 
 class TreeNode {
     public:
@@ -29,30 +50,6 @@ class TreeNode {
       TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
 };
 
-
-
-TreeNode* buildLevelOrder() {
-    int d; cin>>d;
-    queue<TreeNode*> q;
-    TreeNode* root = new TreeNode(d);
-    q.push(root);
-    while(!q.empty()) {
-        TreeNode* curr = q.front();
-        q.pop();
-
-        int d1,d2;
-        cin>>d1>>d2;
-        if(d1!=-1) {
-            curr->left = new TreeNode(d1);
-            q.push(curr->left);
-        }
-        if(d2!=-1) {
-            curr->right = new TreeNode(d2);
-            q.push(curr->right);
-        }
-    }
-    return root;
-}
 
 int height(TreeNode * root) {
   if(root == NULL) {
@@ -79,7 +76,7 @@ int height(TreeNode * root) {
         int height;
         int diameter;
  };
-
+//o(N)
  HDPair optimized(TreeNode* node) {
     HDPair p;
     if(node == NULL) {
