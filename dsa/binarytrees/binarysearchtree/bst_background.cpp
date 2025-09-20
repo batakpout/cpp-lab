@@ -58,10 +58,10 @@ Difference between Complete Binary Tree and Balanced Binary Tree:
 
 Summary Table:
 
-| Property           | Complete Binary Tree        | Balanced Binary Tree          |
-|-------------------|----------------------------|-------------------------------|
+| Property           | Complete Binary Tree       | Balanced Binary Tree            |
+|--------------------|----------------------------|---------------------------------|
 | Node placement     | Left-to-right fill         | Any, as long as height balanced |
-| Last level         | May be partially filled    | Not relevant                  |
-| Height difference  | Not considered             | ≤ 1 at every node             |
+| Last level         | May be partially filled    | Not relevant                    |
+| Height difference  | Not considered             | ≤ 1 at every node               |
 | Purpose            | Efficient storage in array | Efficient operations (O(log n)) |
 */
