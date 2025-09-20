@@ -8,6 +8,57 @@ Example 1:
 Input: p = [1,2,3], q = [1,2,3]
 Output: true
 
+
+This program checks whether two binary trees are identical
+(same structure and same node values).
+
+Example Input Trees (level order):
+
+Tree 1:
+1 2 4 -1 -1 5 -1 -1 3 6 -1 -1 7 -1 -1
+
+        1
+       / \
+      2   3
+     / \ / \
+    4  5 6  7
+
+Tree 2:
+1 2 3 -1 -1 5 -1 -1 3 6 -1 -1 7 -1 -1
+
+        1
+       / \
+      2   3
+     / \ / \
+    3  5 6  7
+
+Explanation:
+- Node values differ (Tree 1 has 4 as left child of 2; Tree 2 has 3).
+- Therefore, the trees are **not** the same.
+
+Expected Output:
+checking is same tree:
+0    // 0 = false
+
+
+        1
+       / \
+      2   3
+     / \ / \
+    4  5 6  7
+
+Tree 2:
+1 2 4 -1 -1 5 -1 -1 3 6 -1 -1 7 -1 -1
+
+        1
+       / \
+      2   3
+     / \ / \
+    4  5 6  7
+
+Both trees have identical structure and node values.
+checking is same tree:
+1    // 1 = true
  */
 #include<iostream>
 #include "../../tree.h"
