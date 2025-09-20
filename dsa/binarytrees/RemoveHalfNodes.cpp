@@ -1,7 +1,27 @@
 #include<iostream>
 #include "tree.h"
 using namespace std;
+/*
+Example:
+Input tree (level order):
+        1
+       / \
+      2   3
+       \
+        4
+       / \
+      5   6
 
+After removal of 2:
+        1
+       / \
+      4   3
+     / \
+    5   6
+
+In-order output:
+5 4 6 1 3
+*/
 TreeNode* removeHalfNodes(TreeNode* root) {
 
     if(root == NULL) {
