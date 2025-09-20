@@ -19,15 +19,53 @@ Output: 5
 When we hear "shortest path" or "closest" in the context of trees or graphs, Breadth-First Search (BFS) is an excellent choice.
 BFS explores the tree level by level. The first time we encounter a leaf node, we’re guaranteed it's at the minimum possible depth.
 
- */
+
+This program finds the minimum depth of a binary tree
+(the number of nodes on the shortest path from root to the nearest leaf).
+
+Example 1
+Input (level order):
+3 9 20 -1 -1 15 7 -1 -1 -1 -1
+
+Tree:
+        3
+       / \
+      9   20
+          / \
+         15  7
+
+Minimum depth path: 3 -> 9
+Expected output:
+Min Depth: 2
+
+
+Example 2
+Input (level order):
+2 -1 3 -1 4 -1 5 -1 6 -1 -1
+
+Tree:
+    2
+     \
+      3
+       \
+        4
+         \
+          5
+           \
+            6
+
+Minimum depth path: 2 -> 3 -> 4 -> 5 -> 6
+Expected output:
+Min Depth: 5
+*/
 #include "../../tree.h"
 
-int minDepthBFS(TreeNode* node) {
-    if(node == NULL) {
+int minDepthBFS(TreeNode* root) {
+    if(root == NULL) {
         return 0;
     }
     queue<TreeNode*> q;
-    q.push(node);
+    q.push(root);
 
     int depth=1;
     while(!q.empty()) {
@@ -35,7 +73,7 @@ int minDepthBFS(TreeNode* node) {
         while(n--) {
             TreeNode* curr = q.front();
             q.pop();
-            if(curr->left == NULL  && curr->right == NULL) {
+            if(curr->left == NULL && curr->right == NULL) {
                 return depth;
             }
             if(curr->left != NULL) {
