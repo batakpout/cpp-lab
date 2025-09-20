@@ -10,6 +10,29 @@ Explanation: There are two left leaves in the binary tree, with values 9 and 15 
 
 Input: root = [1]
 Output: 0
+
+
+This program calculates the sum of all **left leaf** nodes in a binary tree.
+(A left leaf is a node that is the left child of its parent and has no children.)
+
+Example Input (level order):
+10 5 15 3 7 12 20 -1 -1 -1 -1 -1 -1 -1 -1
+
+Tree:
+            10
+           /  \
+          5    15
+         / \   / \
+        3   7 12  20
+
+Left leaves:
+- 3   (left child of 5)
+- 12  (left child of 15)
+
+Expected Output:
+15   // 3 + 12
+
+
  */
 
 #include<iostream>
@@ -19,7 +42,7 @@ using namespace std;
 int sumOfLeftLeaves(TreeNode* root) {
     if(!root) return 0;
     int sum =0;
-    if(root->left && !root->left->left && !root->left->right) {
+    if(root->left && !root->left->left && !root->left->right) {//r->l->l ==NULL and ..
         sum = root->left->val;
     }
     sum = sum + sumOfLeftLeaves(root->left);
