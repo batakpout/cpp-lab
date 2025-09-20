@@ -8,7 +8,7 @@
     Insert           | O(1)             | O(n)           | O(1) / O(n)*   | O(log n)      | O(1)
     Delete           | O(1)             | O(n)           | O(n)           | O(log n)      | O(1)
     Find Closest     | O(n)             | O(log n)       | O(n)           | O(log n)      | O(n)
-    Sorted Traversal | O(n log n)       | O(n)           | O(n log n)**    | O(n)          | O(n log n)
+    Sorted Traversal | O(n log n)       | O(n)           | O(n log n)**   | O(n)          | O(n log n)
 
     * From table, hashing is not good for finding closest value, sorting data[we use AVL tree or red black tree: self balancing binary search trees] and  prefix searching[all keys which match with a particular search: Trie data strucutre is best for it, provides quick prefix searching]
     * Linked List Insert:
@@ -25,5 +25,43 @@
     ==> BST problems follow a recursive structure
     ==> Mostly all problems can be solved by dividing the problem into subproblems and making recursive calls on subtree.
 
-      todo: diff between complete and balanced bst
+    
+Difference between Complete Binary Tree and Balanced Binary Tree:
+
+1. Complete Binary Tree (CBT)
+   - Definition: All levels are fully filled except possibly the last, 
+     which is filled from left to right.
+   - Key Points:
+     * Last level may not be full.
+     * Nodes at last level are filled left-to-right.
+     * Focus is on node placement, not heights or values.
+   - Example:
+            1
+           / \
+          2   3
+         / \  /
+        4  5 6
+
+2. Balanced Binary Tree (Height-Balanced, e.g., AVL)
+   - Definition: Height difference between left and right subtrees 
+     of every node is at most 1.
+   - Key Points:
+     * Focus is on height balance.
+     * Nodes do not need to be filled left-to-right.
+     * Ensures operations like search/insert/delete are O(log n).
+   - Example:
+            1
+           / \
+          2   3
+         /
+        4
+
+Summary Table:
+
+| Property           | Complete Binary Tree        | Balanced Binary Tree          |
+|-------------------|----------------------------|-------------------------------|
+| Node placement     | Left-to-right fill         | Any, as long as height balanced |
+| Last level         | May be partially filled    | Not relevant                  |
+| Height difference  | Not considered             | ≤ 1 at every node             |
+| Purpose            | Efficient storage in array | Efficient operations (O(log n)) |
 */
