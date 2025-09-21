@@ -13,7 +13,16 @@ Explanation: Nodes 7, 10, and 15 are in the range [7, 15]. 7 + 10 + 15 = 32.
 
 #include "../../../tree.h"
 #include "../../bst.h"
-
+/*
+            10
+           /  \
+          5    15
+         / \     \
+        3   7     18
+Example Call:
+    rangeSumBST(root, 7, 15);
+    Total Sum = 10 + 7 + 15 = 32
+*/
 int rangeSumBST(TreeNode* root, int low, int high) {
         if(root == NULL) {
             return 0;
