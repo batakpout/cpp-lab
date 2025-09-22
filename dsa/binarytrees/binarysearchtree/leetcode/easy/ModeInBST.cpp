@@ -99,7 +99,8 @@ vector<int> findMode(TreeNode* root) {
    return res;
 
 }
-
+//TC: Traversing all nodes is O(n), where n is the number of nodes in the tree.
+//SC: recursion stack as extra space, it’s O(h), where h is the height of the tree (O(log n) for a balanced BST, O(n) in the worst case of a skewed tree).
 class Approach2 {
   int max_freq = 0;
   int curr_freq = 0;
