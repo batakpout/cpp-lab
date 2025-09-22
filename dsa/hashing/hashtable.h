@@ -165,7 +165,6 @@ class HashTable {
             return nullptr;
         }
 
-        //we have to comment out ~Node destructor before this
         void erase(string key) {
             int idx = hashFn(key);
             Node<T> * temp = table[idx];
