@@ -4,7 +4,7 @@ using namespace std;
 
 //num1Size=m and num2Size=n
 /*
- Time: O(n.log(n m.log(n)), Space: O(1)
+ Time: O(n.log(n) + m.log(n)), Space: O(1)
 */
 vector<int> approach1(vector<int>& nums1, vector<int>& nums2) {
     sort(nums1.begin(), nums1.end());
@@ -33,7 +33,7 @@ vector<int> approach2(vector<int>& nums1, vector<int>& nums2) {
 }
 
 /*
- Time:  O(n log n + m log m), Space: O(n)
+ Time:  O(n log n + m log m), Space: O(n) -- two pointer approach
 */
 vector<int> approach3(vector<int>& nums1, vector<int>& nums2) {
     sort(nums1.begin(), nums1.end());
