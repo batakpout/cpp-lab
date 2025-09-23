@@ -198,27 +198,6 @@ GOOD HASH FUNCTION PROPERTIES:
 • Fast computation (O(1) for fixed-length strings/integers)
 • Minimize clustering of similar keys
 
-HASH FUNCTION FOR INTEGERS:
-• Use: hash(key) = key % table_size
-• Table size should be PRIME NUMBER (not 10, 100, etc.)
-• Prime numbers avoid clustering when data has common multiples
-• Example: Table size 17 instead of 10
-
-HASH FUNCTION FOR STRINGS:
-
-Method 1 - Simple Sum (BAD):
-hash = (sum of ASCII values) % table_size
-Problems:
-• Anagrams map to same index (bat, tab)
-• Small strings use limited range of table[not unfiformly distributed]
-
-Method 2 - Weighted Sum (BETTER):
-hash = (char[0]*base^0 + char[1]*base^1 + char[2]*base^2 + ...) % table_size
-• Use prime number as base (29, 31, 37)
-• Different positions get different weights
-• Avoids anagram collisions
-• Better distribution across table
-
 COLLISION HANDLING - SEPARATE CHAINING (OPEN HASHING):
 • Create linked list at each hash table bucket
 • When collision occurs, add new key to the chain
@@ -227,17 +206,6 @@ COLLISION HANDLING - SEPARATE CHAINING (OPEN HASHING):
   Bucket 0: [0] -> NULL
   Bucket 1: [1] -> [81] -> NULL  
   Bucket 6: [16] -> [36] -> NULL
-
-LOAD FACTOR AND REHASHING:
-• Load factor = number_of_keys / table_size 
-  or m = no of slots in HT(table_size), n = no of keys to be inserted, LF = N/M;
-  if uniformly distributed of keys in Hast table then,
-  expected chain length = Load Factor i.e 1, LF = alpha means, 
-  time to search = O(1 + alpha), insert/delete = O(1 + alpha)
-• When load factor exceeds threshold, double table size
-• Rehash all existing keys to new table
-• Keeps chain lengths small (3-4 nodes)
-• Maintains O(1) average time complexity
 
 DATA STRUCTURES TO STORE CHAINS:
 • Linked List; if chain length = l then, search/insert/delete O(l); bad not cache friendly
